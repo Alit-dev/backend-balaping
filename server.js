@@ -38,9 +38,10 @@ connectDB();
 
 // Middleware
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-    credentials: true,
+  origin: true,
+  credentials: true,
 }));
+
 
 // Raw body for Stripe webhooks (must be before express.json())
 app.use('/api/billing/webhook', express.raw({ type: 'application/json' }));
@@ -167,3 +168,4 @@ const gracefulShutdown = async (signal) => {
 
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
 process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
