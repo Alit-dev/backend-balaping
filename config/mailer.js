@@ -5,7 +5,7 @@ const resend = new Resend("re_GeWwoH8k_7sZcshiAeNcjN4FA29RE2Uup")
 async function sendMail({ to, subject, html, text }) {
     try {
         const data = await resend.emails.send({
-            from: Bhalaping,
+            from: 'onboarding@resend.dev'
             to,
             subject,
             html,
@@ -21,3 +21,4 @@ async function sendMail({ to, subject, html, text }) {
 }
 
 module.exports = sendMail;
+
