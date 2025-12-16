@@ -1,22 +1,23 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT),
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-    },
-});
+const resend = new Resend("re_GeWwoH8k_7sZcshiAeNcjN4FA29RE2Uup")
 
-// Verify connection configuration
-transporter.verify((error, success) => {
-    if (error) {
-        console.log('⚠️ Email transporter error:', error.message);
-    } else {
-        console.log('✅ Email transporter ready');
+async function sendMail({ to, subject, html, text }) {
+    try {
+        const data = await resend.emails.send({
+            from: Bhalaping,
+            to,
+            subject,
+            html,
+            text,
+        });
+
+        console.log('✅ Email sent:', data.id);
+        return true;
+    } catch (error) {
+        console.error('⚠️ Email error:', error.message);
+        return false;
     }
-});
+}
 
-module.exports = transporter;
+module.exports = sendMail;
